@@ -1,13 +1,10 @@
 "use client";
-import Image from "next/image";
 import { Input } from "./components/Input";
 import { useState } from "react";
 import { Button } from "./components/Button";
 
 export default function Home() {
-  const [error, setError] = useState(0);
-  const [state, setState] = useState("default");
-  const [value, setValue] = useState({
+  const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
     username: "",
@@ -17,20 +14,34 @@ export default function Home() {
     birthDate: "",
   });
 
-  const getFirstName = (e) => {
-    value.password = e.target.value;
-    setValue({ ...value });
+  const [error, setError] = useState({
+    firstName: false,
+    lastName: false,
+    username: false,
+    password: false,
+    email: false,
+    phone: false,
+    birthDate: false,
+  });
+
+  const inputHandler = (e) => {
+    userInfo[e.target.name] = e.target.value;
+    setUserInfo({ ...userInfo });
   };
 
-  const getLastName = (e) => {
-    console.log("Last name");
-  };
+  const checkValue = () => {
+    const checkError = {
+      firstName:
+        !userInfo.firstName || /[0-9]/.test(userInfo.firstName) ? true : false,
+      lastName:
+        !userInfo.lastName || /[^a-zA-Z]/.test(userInfo.lastName)
+          ? true
+          : false,
+      username: !userInfo.username ? true : false,
+    };
 
-  const getPassword = (e) => {
-    console.log("Password");
+    setError(checkError);
   };
-
-  const checkValues = () => {};
 
   return (
     <div className="bg-white w-[470px] h-[655px] p-8 flex flex-col items-center justify-between rounded-lg">
@@ -47,23 +58,28 @@ export default function Home() {
         <div className="flex flex-col gap-3">
           <Input
             label="First name"
+            name="firstName"
             placeholder="Your first name"
-            inputHandler={getFirstName}
+            inputHandler={inputHandler}
             error={error}
           />
           <Input
             label="Last name"
+            name="lastName"
             placeholder="Your last name"
-            inputHandler={getLastName}
+            inputHandler={inputHandler}
+            error={error}
           />
           <Input
             label="Username"
+            name="username"
             placeholder="Username"
-            inputHandler={getPassword}
+            inputHandler={inputHandler}
+            error={error}
           />
         </div>
       </div>
-      <Button label="Continue" onClick={checkValues} state={state} />
+      <Button label="Continue" onClick={checkValue} />
     </div>
   );
 }
