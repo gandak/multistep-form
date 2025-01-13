@@ -30,6 +30,10 @@ export default function Home() {
   };
 
   const checkValue = () => {
+    // test123-с зөвхөн тоог эсвэл үсэг ялгаж авах
+    // console.log("test123".match(/[\p{Number}\p{Mark}]+/gu));
+    // console.log("test123".match(/[\p{Letter}\p{Mark}]+/gu));
+
     const checkError = {
       firstName:
         !userInfo.firstName || /[0-9]/.test(userInfo.firstName) ? true : false,
