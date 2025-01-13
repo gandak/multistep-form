@@ -1,8 +1,37 @@
+"use client";
 import Image from "next/image";
 import { Input } from "./components/Input";
+import { useState } from "react";
+import { Button } from "./components/Button";
 
 export default function Home() {
-  const inputHander = () => {};
+  const [error, setError] = useState(0);
+  const [state, setState] = useState("default");
+  const [value, setValue] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    email: "",
+    phone: "",
+    birthDate: "",
+  });
+
+  const getFirstName = (e) => {
+    value.password = e.target.value;
+    setValue({ ...value });
+  };
+
+  const getLastName = (e) => {
+    console.log("Last name");
+  };
+
+  const getPassword = (e) => {
+    console.log("Password");
+  };
+
+  const checkValues = () => {};
+
   return (
     <div className="bg-white w-[470px] h-[655px] p-8 flex flex-col items-center justify-between rounded-lg">
       <div className="w-full">
@@ -18,17 +47,23 @@ export default function Home() {
         <div className="flex flex-col gap-3">
           <Input
             label="First name"
-            placeholder="Please input your first name"
+            placeholder="Your first name"
+            inputHandler={getFirstName}
+            error={error}
           />
-          <Input label="Last name" placeholder="Please input your last name" />
-          <Input label="Username" placeholder="Please input your username" />
+          <Input
+            label="Last name"
+            placeholder="Your last name"
+            inputHandler={getLastName}
+          />
+          <Input
+            label="Username"
+            placeholder="Username"
+            inputHandler={getPassword}
+          />
         </div>
       </div>
-      <div className="w-full overflow-hidden flex justify-center">
-        <button className="w-full bg-black text-white h-[44px] pt-[10px] pb-[10px] pl-[12px] pr-[12px] rounded-lg">
-          Continue 1/3
-        </button>
-      </div>
+      <Button label="Continue" onClick={checkValues} state={state} />
     </div>
   );
 }
