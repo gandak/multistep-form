@@ -9,7 +9,7 @@ export const Input = ({
   return (
     <div className="w-full flex flex-col gap-2 ease-in-out">
       <p className="text-[#334155] text-[14px] font-semibold leading-4">
-        {label}
+        {label} <span className="text-red-500">*</span>
       </p>
 
       <input

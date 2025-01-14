@@ -39,10 +39,6 @@ export default function Home() {
     setUserInfo({ ...userInfo });
   };
 
-  const goBack = () => {
-    setCurrenStep(currentStep - 1);
-  };
-
   return (
     <div className="bg-white w-[470px] h-[655px] p-8 flex flex-col items-center justify-between rounded-lg">
       <FormSteps
