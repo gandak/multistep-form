@@ -7,7 +7,10 @@ export const StepOne = ({ inputHandler, error, value }) => {
       <div className="w-full pb-[28px]">
         <img src="/pinecone.png" alt="" />
         <h1 className="font-bold text-[#202124] text-[26px] font-semibold">
-          Join Us! smile
+          Join Us!{" "}
+          <span role="img" aria-label="smile">
+            😎
+          </span>
         </h1>
         <p className="text-[#8E8E8E]">
           Please provide all current information accurately
@@ -21,6 +24,7 @@ export const StepOne = ({ inputHandler, error, value }) => {
           placeholder="Your first name"
           inputHandler={inputHandler}
           error={error}
+          type="text"
         />
         <Input
           value={value.lastName}
@@ -29,6 +33,7 @@ export const StepOne = ({ inputHandler, error, value }) => {
           placeholder="Your last name"
           inputHandler={inputHandler}
           error={error}
+          type="text"
         />
         <Input
           value={value.username}
@@ -37,6 +42,7 @@ export const StepOne = ({ inputHandler, error, value }) => {
           placeholder="Username"
           inputHandler={inputHandler}
           error={error}
+          type="text"
         />
       </div>
     </div>

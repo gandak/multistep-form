@@ -10,24 +10,32 @@ export const ButtonTwo = ({
 }) => {
   const checkValue = () => {
     const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     const checkError = {
       email: !userInfo.email
         ? "Email field is empty"
-        : /[^a-zA-Z]/.test(userInfo.email)
+        : !emailPattern.test(userInfo.email)
         ? "Email cannot contain special characters or numbers."
         : "",
-      phone: !userInfo.phone.length ? "Your phone number is wrong" : "",
-      // password: !userInfo.username
-      //   ? "Username field is empty."
-      //   : userInfo.username.length < 6
-      //   ? "Username must be contain 6 or more characters"
-      //   : /^\d+$/.test(userInfo.username)
-      //   ? "Username cannot be only numbers"
-      //   : specialCharacters.test(userInfo.username)
-      //   ? "Username cannot contain special characters"
-      //   : "",
+      phone: !userInfo.phone.trim()
+        ? "Phone number field is wrong"
+        : /[a-zA-z`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(userInfo.phone)
+        ? "Your phone number can contain only numbers"
+        : userInfo.phone.length !== 8
+        ? "Your phone number must be contain 8 numbers"
+        : "",
+      password: !userInfo.password
+        ? "Password field is empty."
+        : userInfo.password.length < 6
+        ? "Password must be contain 6 or more characters"
+        : "",
+      passwordConfirm: !userInfo.passwordConfirm
+        ? "Confirm password field is empty."
+        : userInfo.passwordConfirm !== userInfo.password
+        ? "Password are not same. Please input same password"
+        : "",
     };
 
     setErrorMessage(checkError);

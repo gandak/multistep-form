@@ -2,13 +2,15 @@ import { UserIcon } from "lucide-react";
 import { Input } from "./Input";
 
 export const StepTwo = ({ inputHandler, error, value }) => {
-  console.log(value);
   return (
     <div className="w-full">
       <div className="w-full pb-[28px]">
         <img src="/pinecone.png" alt="" />
         <h1 className="font-bold text-[#202124] text-[26px] font-semibold">
-          Join Us! smile
+          Join Us!{" "}
+          <span role="img" aria-label="smile">
+            😎
+          </span>
         </h1>
         <p className="text-[#8E8E8E]">
           Please provide all current information accurately
@@ -22,6 +24,7 @@ export const StepTwo = ({ inputHandler, error, value }) => {
           placeholder="Your email"
           inputHandler={inputHandler}
           error={error}
+          type="email"
         />
         <Input
           value={value.phone}
@@ -30,9 +33,11 @@ export const StepTwo = ({ inputHandler, error, value }) => {
           placeholder="Your phone number"
           inputHandler={inputHandler}
           error={error}
+          type="text"
         />
         <Input
           value={value.password}
+          type="password"
           label="Password"
           name="password"
           placeholder="Password"
@@ -41,9 +46,10 @@ export const StepTwo = ({ inputHandler, error, value }) => {
         />
         <Input
           value={value.passwordConfirm}
+          type="password"
           label="Confirm Password"
           name="passwordConfirm"
-          placeholder="Password"
+          placeholder="Confirm password"
           inputHandler={inputHandler}
           error={error}
         />

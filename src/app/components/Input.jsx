@@ -5,6 +5,7 @@ export const Input = ({
   inputHandler,
   error,
   value,
+  type,
 }) => {
   return (
     <div className="w-full flex flex-col gap-2 ease-in-out">
@@ -14,7 +15,7 @@ export const Input = ({
 
       <input
         value={value}
-        type="text"
+        type={type}
         name={name}
         placeholder={placeholder}
         onChange={inputHandler}
