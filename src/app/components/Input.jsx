@@ -1,11 +1,11 @@
-export const Input = ({ label, name, placeholder, inputHandler, error }) => {
-  const errorMessages = {
-    empty: "This field cannot be empty.",
-    firstName: "First name cannot contain special characters or numbers.",
-    lastName: "Last name cannot contain special characters or numbers.",
-    username: "This username is already taken. Please choose another one.",
-  };
-
+export const Input = ({
+  label,
+  name,
+  placeholder,
+  inputHandler,
+  error,
+  value,
+}) => {
   return (
     <div className="w-full flex flex-col gap-2 ease-in-out">
       <p className="text-[#334155] text-[14px] font-semibold leading-4">
@@ -13,6 +13,7 @@ export const Input = ({ label, name, placeholder, inputHandler, error }) => {
       </p>
 
       <input
+        value={value}
         type="text"
         name={name}
         placeholder={placeholder}
@@ -30,7 +31,7 @@ export const Input = ({ label, name, placeholder, inputHandler, error }) => {
             : "hidden"
         }`}
       >
-        {errorMessages[name]}
+        {error[name]}
       </p>
     </div>
   );
