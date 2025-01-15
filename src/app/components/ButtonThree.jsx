@@ -8,19 +8,55 @@ export const ButtonThree = ({
   userInfo,
   label,
 }) => {
+  const checkIfAdult = (birthdate) => {
+    let inputtedDate = birthdate.replaceAll("-", "");
+
+    let year = Number(inputtedDate.substr(0, 4));
+
+    let month = Number(inputtedDate.substr(4, 2));
+    let day = Number(inputtedDate.substr(6, 2));
+
+    let today = new Date();
+
+    let age = today.getFullYear() - year;
+
+    if (age == 18) {
+      if (
+        today.getMonth() < month ||
+        (today.getMonth() == month && today.getDate() < day)
+      )
+        return false;
+
+      if (age < 18) {
+        return false;
+      } else return true;
+    }
+
+    {
+      age--;
+    }
+  };
+
   const checkValue = () => {
     const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     const emailPattern =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     const checkError = {
-      birthDate: !userInfo.birthDate ? "Date of birth field is empty" : "",
+      birthDate: !userInfo.birthDate
+        ? "Date of birth field is empty"
+        : checkIfAdult(userInfo.birthDate)
+        ? "You are not over 18"
+        : "",
       image: !userInfo.image ? "You must upload your profile image" : "",
     };
 
     setErrorMessage(checkError);
-    if (!Object.values(checkError).some((v) => v))
+    if (!Object.values(checkError).some((v) => v)) {
       setCurrenStep(currentStep + 1);
+      localStorage.removeItem("currentStep");
+      localStorage.setItem("currentStep", currentStep);
+    }
   };
 
   const goBack = () => {

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { useEffect } from "react";
 
 export const ButtonOne = ({
   setErrorMessage,
@@ -18,19 +19,21 @@ export const ButtonOne = ({
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const checkError = {
-      firstName:
-        userInfo.firstName.length < 3
-          ? "Your name must be contain 3 or more characters"
-          : !userInfo.firstName || /[^a-zA-Z]/.test(userInfo.firstName)
-          ? "First name cannot contain special characters or numbers."
-          : "",
-      lastName:
-        userInfo.lastName.length < 3
-          ? "Your name must be contain 3 or more characters"
-          : !userInfo.lastName || /[^a-zA-Z]/.test(userInfo.lastName)
-          ? "Last name cannot contain special characters or numbers."
-          : "",
-      username: !userInfo.username
+      firstName: !userInfo.firstName.trim()
+        ? "First name field is empty"
+        : userInfo.firstName.length < 3
+        ? "Your name must be contain 3 or more characters"
+        : !userInfo.firstName || /[^a-zA-Z]/.test(userInfo.firstName)
+        ? "First name cannot contain special characters or numbers."
+        : "",
+      lastName: !userInfo.lastName.trim()
+        ? "Last name field is empty"
+        : userInfo.lastName.length < 3
+        ? "Your name must be contain 3 or more characters"
+        : !userInfo.lastName || /[^a-zA-Z]/.test(userInfo.lastName)
+        ? "Last name cannot contain special characters or numbers."
+        : "",
+      username: !userInfo.username.trim()
         ? "Username field is empty."
         : userInfo.username.length < 6
         ? "Username must be contain 6 or more characters"
@@ -42,8 +45,10 @@ export const ButtonOne = ({
     };
 
     setErrorMessage(checkError);
-    if (!Object.values(checkError).some((v) => v))
+    if (!Object.values(checkError).some((v) => v)) {
       setCurrenStep(currentStep + 1);
+      localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
+    }
   };
 
   return (

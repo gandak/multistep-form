@@ -10,13 +10,11 @@ export const ButtonTwo = ({
 }) => {
   const checkValue = () => {
     const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    const emailPattern =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     const checkError = {
       email: !userInfo.email
         ? "Email field is empty"
-        : !emailPattern.test(userInfo.email)
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userInfo.email)
         ? "Email cannot contain special characters or numbers."
         : "",
       phone: !userInfo.phone.trim()
@@ -39,8 +37,12 @@ export const ButtonTwo = ({
     };
 
     setErrorMessage(checkError);
-    if (!Object.values(checkError).some((v) => v))
+
+    if (!Object.values(checkError).some((v) => v)) {
       setCurrenStep(currentStep + 1);
+      localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
+      localStorage.setItem("currentStep", currentStep);
+    }
   };
 
   const goBack = () => {

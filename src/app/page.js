@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ButtonOne } from "./components/ButtonOne";
 import { ButtonTwo } from "./components/ButtonTwo";
 import { ButtonThree } from "./components/ButtonThree";
@@ -42,6 +42,16 @@ export default function Home() {
     setUserInfo({ ...userInfo });
   };
 
+  useEffect(() => {
+    const savedUserInfo = JSON.parse(localStorage.getItem("savedUserInfo"));
+    const savedCurrentStep = JSON.parse(localStorage.getItem("currentStep"));
+
+    if (savedCurrentStep) {
+      setUserInfo({ ...savedUserInfo });
+      setCurrenStep(savedCurrentStep);
+    }
+  }, []);
+
   return (
     <div
       className={`bg-white w-[470px] ${
@@ -60,7 +70,6 @@ export default function Home() {
           setCurrenStep={setCurrenStep}
           userInfo={userInfo}
           label="Continue"
-          // goBack={goBack}
         />
       ) : (
         ""
