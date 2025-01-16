@@ -26,6 +26,8 @@ export default function Home() {
     image: "",
   });
 
+  // console.log(userInfo);
+
   const [errorMessage, setErrorMessage] = useState({
     firstName: "",
     lastName: "",
@@ -44,10 +46,16 @@ export default function Home() {
 
   useEffect(() => {
     const savedUserInfo = JSON.parse(localStorage.getItem("savedUserInfo"));
+
     const savedCurrentStep = JSON.parse(localStorage.getItem("currentStep"));
 
+    const savedImagedFile = JSON.parse(localStorage.getItem("savedImageFile"));
+
     if (savedCurrentStep) {
+      savedUserInfo.image = savedImagedFile;
+
       setUserInfo({ ...savedUserInfo });
+
       setCurrenStep(savedCurrentStep);
     }
   }, []);

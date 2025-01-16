@@ -27,11 +27,7 @@ export const ButtonThree = ({
           (today.getMonth() + 1 === month && today.getDate() < day)))
     ) {
       return false;
-    } else {
-      localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
-      localStorage.setItem("currentStep", currentStep);
-      return true;
-    }
+    } else return true;
   };
 
   const checkValue = () => {
@@ -51,6 +47,8 @@ export const ButtonThree = ({
     setErrorMessage(checkError);
     if (!Object.values(checkError).some((v) => v)) {
       setCurrenStep(currentStep + 1);
+      localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
+      localStorage.setItem("currentStep", currentStep);
     }
   };
 

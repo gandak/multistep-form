@@ -3,14 +3,17 @@ import { Input } from "./Input";
 import { useState } from "react";
 
 export const StepThree = ({ inputHandler, error, value }) => {
+  // console.log(value.image);
   const [image, setImage] = useState(null);
 
   const handleImageChange = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
+
     if (file) {
-      setImage(URL.createObjectURL(file));
       inputHandler({ target: { name: "image", value: file } });
     }
+    localStorage.setItem("savedImageFile", JSON.stringify(file));
   };
 
   const handleDrop = (e) => {
@@ -27,7 +30,7 @@ export const StepThree = ({ inputHandler, error, value }) => {
   };
 
   const removeImage = () => {
-    setImage(null);
+    // setImage(null);
     // setUserInfo((prev) => ({ ...prev, [image]: null }));
   };
 
@@ -62,10 +65,10 @@ export const StepThree = ({ inputHandler, error, value }) => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
         >
-          {image ? (
+          {value.image ? (
             <div>
               <img
-                src={image}
+                src={""}
                 alt="Uploaded"
                 className="w-32 h-32 object-cover rounded-full"
               />
