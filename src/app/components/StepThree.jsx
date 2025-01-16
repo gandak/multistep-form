@@ -1,4 +1,4 @@
-import { UserIcon, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Input } from "./Input";
 import { useState, useEffect } from "react";
 
