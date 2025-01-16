@@ -1,4 +1,3 @@
-import { UserIcon } from "lucide-react";
 import { Input } from "./Input";
 
 export const StepOne = ({ inputHandler, error, value }) => {

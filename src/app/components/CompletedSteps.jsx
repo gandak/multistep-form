@@ -1,6 +1,4 @@
 export const CompletedSteps = () => {
-  // localStorage.removeItem("savedUserInfo");
-  // localStorage.removeItem("currentStep");
   return (
     <div className="w-full">
       <div className="w-full pb-[28px]">

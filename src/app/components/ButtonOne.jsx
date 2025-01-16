@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { useEffect } from "react";
 
 export const ButtonOne = ({
   setErrorMessage,
@@ -9,14 +8,7 @@ export const ButtonOne = ({
   label,
 }) => {
   const checkValue = () => {
-    // test123-с зөвхөн тоог эсвэл үсэг ялгаж авах
-    // console.log("test123".match(/[\p{Number}\p{Mark}]+/gu));
-    // console.log("test123".match(/[\p{Letter}\p{Mark}]+/gu));
-
-    // /[0-9]/.test(userInfo.firstName)
-
     const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const checkError = {
       firstName: !userInfo.firstName.trim()

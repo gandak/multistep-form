@@ -9,8 +9,6 @@ export const ButtonTwo = ({
   label,
 }) => {
   const checkValue = () => {
-    const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-
     const checkError = {
       email: !userInfo.email
         ? "Email field is empty"

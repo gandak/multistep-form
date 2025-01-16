@@ -31,10 +31,6 @@ export const ButtonThree = ({
   };
 
   const checkValue = () => {
-    const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    const emailPattern =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
     const checkError = {
       birthDate: !userInfo.birthDate
         ? "Date of birth field is empty"
