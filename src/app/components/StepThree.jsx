@@ -1,4 +1,4 @@
-import { UserIcon } from "lucide-react";
+import { UserIcon, Trash2 } from "lucide-react";
 import { Input } from "./Input";
 import { useState } from "react";
 
@@ -24,6 +24,11 @@ export const StepThree = ({ inputHandler, error, value }) => {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  const removeImage = () => {
+    setImage(null);
+    // setUserInfo((prev) => ({ ...prev, [image]: null }));
   };
 
   return (
@@ -58,11 +63,17 @@ export const StepThree = ({ inputHandler, error, value }) => {
           onDragOver={handleDragOver}
         >
           {image ? (
-            <img
-              src={image}
-              alt="Uploaded"
-              className="w-32 h-32 object-cover rounded-full"
-            />
+            <div>
+              <img
+                src={image}
+                alt="Uploaded"
+                className="w-32 h-32 object-cover rounded-full"
+              />
+              <button className="absolute right-[30px] bottom-[15px] flex flex-col items-center">
+                <Trash2 color="red" onClick={removeImage} />
+                <p className="text-[12px] text-red-500">Delete image</p>
+              </button>
+            </div>
           ) : (
             <>
               <div className="bg-white p-2 rounded-full w-[28px] h-[28px]">

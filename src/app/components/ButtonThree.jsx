@@ -20,20 +20,18 @@ export const ButtonThree = ({
 
     let age = today.getFullYear() - year;
 
-    if (age == 18) {
-      if (
-        today.getMonth() + 1 < month ||
-        (today.getMonth() + 1 == month && today.getDate() < day)
-      ) {
-        return false;
-      }
-
-      if (age < 18) {
-        return false;
-      } else return true;
+    if (
+      age < 18 ||
+      (age === 18 &&
+        (today.getMonth() + 1 < month ||
+          (today.getMonth() + 1 === month && today.getDate() < day)))
+    ) {
+      return false;
+    } else {
+      localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
+      localStorage.setItem("currentStep", currentStep);
+      return true;
     }
-    localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
-    localStorage.setItem("currentStep", currentStep);
   };
 
   const checkValue = () => {

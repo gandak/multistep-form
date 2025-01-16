@@ -28,6 +28,10 @@ export const ButtonTwo = ({
         ? "Password field is empty."
         : userInfo.password.length < 6
         ? "Password must be contain 6 or more characters"
+        : /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])\S{8,16}$/.test(
+            userInfo.password
+          )
+        ? "at least 1 number, 1 uppercase letter, 1 special character"
         : "",
       passwordConfirm: !userInfo.passwordConfirm
         ? "Confirm password field is empty."
