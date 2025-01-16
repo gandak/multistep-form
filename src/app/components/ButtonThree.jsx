@@ -22,19 +22,18 @@ export const ButtonThree = ({
 
     if (age == 18) {
       if (
-        today.getMonth() < month ||
-        (today.getMonth() == month && today.getDate() < day)
-      )
+        today.getMonth() + 1 < month ||
+        (today.getMonth() + 1 == month && today.getDate() < day)
+      ) {
         return false;
+      }
 
       if (age < 18) {
         return false;
       } else return true;
     }
-
-    {
-      age--;
-    }
+    localStorage.setItem("savedUserInfo", JSON.stringify(userInfo));
+    localStorage.setItem("currentStep", currentStep);
   };
 
   const checkValue = () => {
@@ -45,7 +44,7 @@ export const ButtonThree = ({
     const checkError = {
       birthDate: !userInfo.birthDate
         ? "Date of birth field is empty"
-        : checkIfAdult(userInfo.birthDate)
+        : !checkIfAdult(userInfo.birthDate)
         ? "You are not over 18"
         : "",
       image: !userInfo.image ? "You must upload your profile image" : "",
@@ -54,8 +53,6 @@ export const ButtonThree = ({
     setErrorMessage(checkError);
     if (!Object.values(checkError).some((v) => v)) {
       setCurrenStep(currentStep + 1);
-      localStorage.removeItem("currentStep");
-      localStorage.setItem("currentStep", currentStep);
     }
   };
 
