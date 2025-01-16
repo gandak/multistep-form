@@ -1,27 +1,49 @@
 import { UserIcon, Trash2 } from "lucide-react";
 import { Input } from "./Input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const StepThree = ({ inputHandler, error, value }) => {
-  // console.log(value.image);
-  const [image, setImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+
+  useEffect(() => {
+    const savedImage = localStorage.getItem("savedImageFile");
+    if (savedImage) {
+      setPreviewImage(savedImage);
+      inputHandler({ target: { name: "image", value: savedImage } });
+    }
+  }, []);
 
   const handleImageChange = (e) => {
     e.preventDefault();
+
     const file = e.target.files[0];
 
     if (file) {
-      inputHandler({ target: { name: "image", value: file } });
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result;
+        setPreviewImage(base64Image);
+        inputHandler({ target: { name: "image", value: base64Image } });
+        localStorage.setItem("savedImageFile", base64Image);
+      };
+      reader.readAsDataURL(file);
     }
-    localStorage.setItem("savedImageFile", JSON.stringify(file));
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
+
     if (file) {
-      setImage(URL.createObjectURL(file));
-      inputHandler({ target: { name: "image", value: file } });
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result;
+        setPreviewImage(base64Image);
+        inputHandler({ target: { name: "image", value: base64Image } });
+        localStorage.setItem("savedImageFile", base64Image);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -30,8 +52,9 @@ export const StepThree = ({ inputHandler, error, value }) => {
   };
 
   const removeImage = () => {
-    // setImage(null);
-    // setUserInfo((prev) => ({ ...prev, [image]: null }));
+    setPreviewImage(null);
+    inputHandler({ target: { name: "image", value: null } });
+    localStorage.removeItem("savedImageFile");
   };
 
   return (
@@ -65,10 +88,10 @@ export const StepThree = ({ inputHandler, error, value }) => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
         >
-          {value.image ? (
+          {previewImage ? (
             <div>
               <img
-                src={""}
+                src={previewImage}
                 alt="Uploaded"
                 className="w-32 h-32 object-cover rounded-full"
               />

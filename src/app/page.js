@@ -49,11 +49,7 @@ export default function Home() {
 
     const savedCurrentStep = JSON.parse(localStorage.getItem("currentStep"));
 
-    const savedImagedFile = JSON.parse(localStorage.getItem("savedImageFile"));
-
     if (savedCurrentStep) {
-      savedUserInfo.image = savedImagedFile;
-
       setUserInfo({ ...savedUserInfo });
 
       setCurrenStep(savedCurrentStep);
