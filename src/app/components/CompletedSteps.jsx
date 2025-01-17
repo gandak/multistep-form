@@ -1,6 +1,15 @@
+import * as motion from "motion/react-client";
+
 export const CompletedSteps = () => {
   return (
-    <div className="w-full">
+    <motion.div
+      initial={{ opacity: 0, scale: 1 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 2,
+      }}
+      className="w-full"
+    >
       <div className="w-full pb-[28px]">
         <img src="/pinecone.png" alt="" />
         <h1 className="font-bold text-[#202124] text-[26px] font-semibold">
@@ -13,6 +22,6 @@ export const CompletedSteps = () => {
           We have received your submission. Thank you!
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };

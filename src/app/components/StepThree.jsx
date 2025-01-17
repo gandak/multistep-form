@@ -1,6 +1,7 @@
 import { Trash2 } from "lucide-react";
 import { Input } from "./Input";
 import { useState, useEffect } from "react";
+import * as motion from "motion/react-client";
 
 export const StepThree = ({ inputHandler, error, value }) => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -71,7 +72,13 @@ export const StepThree = ({ inputHandler, error, value }) => {
           Please provide all current information accurately
         </p>
       </div>
-      <div className="flex flex-col gap-3">
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -30, opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        className="flex flex-col gap-3"
+      >
         <Input
           value={value.birthDate}
           label="Date of birth"
@@ -125,7 +132,7 @@ export const StepThree = ({ inputHandler, error, value }) => {
         >
           {error.image}
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

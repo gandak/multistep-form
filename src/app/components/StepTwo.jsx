@@ -1,4 +1,5 @@
 import { Input } from "./Input";
+import * as motion from "motion/react-client";
 
 export const StepTwo = ({ inputHandler, error, value }) => {
   return (
@@ -15,7 +16,13 @@ export const StepTwo = ({ inputHandler, error, value }) => {
           Please provide all current information accurately
         </p>
       </div>
-      <div className="flex flex-col gap-3">
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -30, opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        className="flex flex-col gap-3"
+      >
         <Input
           value={value.email}
           label="Email"
@@ -52,7 +59,7 @@ export const StepTwo = ({ inputHandler, error, value }) => {
           inputHandler={inputHandler}
           error={error}
         />
-      </div>
+      </motion.div>
     </div>
   );
 };
